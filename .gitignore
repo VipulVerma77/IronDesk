@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.cache
+appsettings.json
+appsettings.*.json
+!appsettings.example.json
