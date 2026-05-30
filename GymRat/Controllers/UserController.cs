@@ -20,9 +20,7 @@ namespace GymRat.Controllers
         private int GetUserId() => int.Parse(User.FindFirstValue("UserId")!);
         private int GetGymId() => int.Parse(User.FindFirstValue("GymId")!);
 
-        // ─────────────────────────────────────────
-        // USER: Update own profile
-        // ─────────────────────────────────────────
+  
         [Authorize]
         [HttpPut("profile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto dto)

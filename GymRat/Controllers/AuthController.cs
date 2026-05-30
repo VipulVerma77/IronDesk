@@ -32,9 +32,7 @@ namespace GymRat.Controllers
             return Ok(result);
         }
 
-        // ─────────────────────────────────────────
-        // LOGIN
-        // ─────────────────────────────────────────
+        
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
@@ -50,13 +48,11 @@ namespace GymRat.Controllers
             return Ok(result);
         }
 
-        // ─────────────────────────────────────────
-        // REFRESH
-        // ─────────────────────────────────────────
+    
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequestDto? dto)
         {
-            // ✅ Cookie first, body fallback
+            //  Cookie first, body fallback
             var incomingToken = Request.Cookies["refreshToken"] ?? dto?.RefreshToken;
 
             var result = await _authService.RefreshTokenAsync(incomingToken);
@@ -64,16 +60,12 @@ namespace GymRat.Controllers
             if (!result.IsSuccess)
                 return Unauthorized(result);
 
-            // ✅ Rotate cookie
             if (result.Data?.RefreshToken != null)
                 SetRefreshTokenCookie(result.Data.RefreshToken);
 
             return Ok(result);
         }
 
-        // ─────────────────────────────────────────
-        // LOGOUT
-        // ─────────────────────────────────────────
         [HttpPost("logout")]
         public async Task<IActionResult> Logout([FromBody] RefreshTokenRequestDto? dto)
         {
@@ -88,9 +80,6 @@ namespace GymRat.Controllers
             return Ok(result);
         }
 
-        // ─────────────────────────────────────────
-        // PROFILE
-        // ─────────────────────────────────────────
         [Authorize]
         [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
@@ -100,9 +89,6 @@ namespace GymRat.Controllers
             return Ok(result);
         }
 
-        // ─────────────────────────────────────────
-        // PRIVATE HELPER
-        // ─────────────────────────────────────────
         private void SetRefreshTokenCookie(string refreshToken)
         {
             Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions

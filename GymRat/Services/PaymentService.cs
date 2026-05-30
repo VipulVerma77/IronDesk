@@ -47,18 +47,16 @@ namespace GymRat.Services
                 return ApiResponse<PaymentResponseDto>.Fail("Cannot pay a cancelled payment");
 
             var subscription = payment.MemberSubscription;
+            
 
-            // ✅ Guard: subscription must be Pending to accept payment
-            if (subscription.Status != "Pending")
+            if (subscription != null && subscription.Status != "Pending")
                 return ApiResponse<PaymentResponseDto>.Fail($"Cannot process payment for a '{subscription.Status}' subscription");
 
             payment.Status = "Paid";
             payment.PaidAt = DateTime.UtcNow;
             payment.TransactionId = Guid.NewGuid().ToString();
 
-            // ✅ StartDate today or past → Active immediately
-            // ✅ StartDate in future → Scheduled (member stays Inactive)
-            if (subscription.StartDate.Date <= DateTime.UtcNow.Date)
+            if ( subscription != null && subscription.StartDate.Date <= DateTime.UtcNow.Date)
             {
                 subscription.Status = "Active";
                 subscription.Member.Status = "Active";
