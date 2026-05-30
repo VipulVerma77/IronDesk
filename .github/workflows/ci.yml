@@ -1,0 +1,45 @@
+name: CI — Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Build and Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # ─────────────────────────────────────────
+      # 1. Checkout code
+      # ─────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ─────────────────────────────────────────
+      # 2. Setup .NET 8
+      # ─────────────────────────────────────────
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # ─────────────────────────────────────────
+      # 3. Restore dependencies
+      # ─────────────────────────────────────────
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # ─────────────────────────────────────────
+      # 4. Build solution
+      # ─────────────────────────────────────────
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # ─────────────────────────────────────────
+      # 5. Run all tests
+      # ─────────────────────────────────────────
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
