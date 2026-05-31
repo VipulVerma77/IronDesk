@@ -23,6 +23,7 @@ export const getProfileAPI = async () => {
 };
 
 export const registerGymAPI = async (data) => {
+  console.log(data);
   const response = await axiosInstance.post(API.GYM_REGISTER, data);
   return response.data;
 };

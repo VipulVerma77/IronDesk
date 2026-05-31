@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://localhost:5006/api';
 
 export const API = {
   // Auth
@@ -14,4 +14,8 @@ export const API = {
   GYM_UPDATE:   `${BASE_URL}/gym/update`,
   GYM_SLUG:     (slug) => `${BASE_URL}/gym/public/${slug}`,
   GYM_DELETE:   `${BASE_URL}/gym/delete`,
+
+
+  // Dashboard
+  DASHBOARD_SUMMARY: `${BASE_URL}/dashboard/summary`,
 };
