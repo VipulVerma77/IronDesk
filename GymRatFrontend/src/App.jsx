@@ -9,6 +9,9 @@ const AdminDashboard  = lazy(() => import('./pages/AdminDashboard/AdminDashboard
 const MemberDashboard = lazy(() => import('./pages/MemberDashboard/MemberDashboard'));
 const RegisterGym     = lazy(() => import('./pages/RegisterGym/RegisterGym'));
 const Login           = lazy(() => import('./pages/Login/Login'));
+const Members = lazy(() => import('./pages/Members/Members'));
+const Subscriptions = lazy(() => import('./pages/Subscriptions/Subscriptions'));
+
 
 const PageLoader = () => {
   return (
@@ -46,8 +49,8 @@ const App = () => {
         {/* Admin routes — wrapped in layout */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index        element={<AdminDashboard />} />
-          <Route path="members"       element={<div className="text-[#2A1F1A]">Members Page</div>} />
-          <Route path="subscriptions" element={<div className="text-[#2A1F1A]">Subscriptions Page</div>} />
+          <Route path="members"       element={<Members />}/>
+          <Route path="subscriptions" element={<Subscriptions />} />
           <Route path="payments"      element={<div className="text-[#2A1F1A]">Payments Page</div>} />
           <Route path="attendance"    element={<div className="text-[#2A1F1A]">Attendance Page</div>} />
           <Route path="settings"      element={<div className="text-[#2A1F1A]">Settings Page</div>} />

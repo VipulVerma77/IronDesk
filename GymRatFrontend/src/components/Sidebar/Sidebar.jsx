@@ -74,7 +74,6 @@ const Sidebar = () => {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="relative h-screen bg-[#FAF7F4] border-r border-[#ECE4DC] flex flex-col overflow-hidden flex-shrink-0"
     >
-      {/* ── Top — Logo ── */}
       <div className="flex items-center justify-between px-4 py-5 border-b border-[#ECE4DC]">
         <AnimatePresence>
           {!collapsed && (

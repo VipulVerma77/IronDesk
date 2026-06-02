@@ -10,7 +10,7 @@ const AdminLayout = () => {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         {/* Top header */}
-        <div className="sticky top-0 z-10 bg-[#FAF7F4]/80 backdrop-blur-sm border-b border-[#ECE4DC] px-8 py-4 flex items-center justify-between">
+        <div className="sticky top-0 z-10 bg-[#FAF7F4]/80 backdrop-blur-sm border-b border-[#ECE4DC] px-4 pt-4 pb-3 flex items-center justify-between">
           <div>
             <h1
               className="text-xl font-black text-[#2A1F1A]"

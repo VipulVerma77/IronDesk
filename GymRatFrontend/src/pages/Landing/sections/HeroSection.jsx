@@ -82,7 +82,7 @@ const HeroSection = () => {
                 size="lg"
                 onClick={() => navigate("/register-gym")}
               >
-                Start Free Trial
+                Register Your Gym
               </Button>
 
               <Button
@@ -220,31 +220,6 @@ const HeroSection = () => {
               </div>
             </div>
 
-            {/* Floating Revenue */}
-            <motion.div
-              animate={{
-                y: [-8, 8, -8],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-              }}
-              className="absolute -left-10 top-[300px] bg-[#C4956A] text-white rounded-3xl p-5 shadow-xl w-[220px]"
-            >
-              <p className="text-sm opacity-80">
-                Monthly Revenue
-              </p>
-
-              <h3
-                className="text-4xl font-bold mt-2"
-                style={{
-                  fontFamily:
-                    "'Playfair Display', serif",
-                }}
-              >
-                ₹84K
-              </h3>
-            </motion.div>
 
             {/* Floating Renewals */}
             <motion.div

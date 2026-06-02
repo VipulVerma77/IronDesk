@@ -38,6 +38,19 @@ namespace GymRat.Controllers
             }
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllPlans()
+        {
+            var gymIdClaim = User.FindFirst("GymId")?.Value;
+
+            if (string.IsNullOrEmpty(gymIdClaim))
+                return Unauthorized(ApiResponse<object>.Fail("GymId not found"));
+
+            int gymId = int.Parse(gymIdClaim);
+            var result = await _service.GetAllPlansAsync(gymId);
+            return Ok(result);
+        }
     }
 
 }

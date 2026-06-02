@@ -5,5 +5,6 @@ namespace GymRat.Services.Interfaces
     public interface IMembershipPlanService
     {
         Task<ApiResponse<MembershipPlanResponseDto>>CreateMemberShipPlanAsync(CreateMembershipPlanDto dto , int gymId);
+        Task<ApiResponse<List<MembershipPlanResponseDto>>> GetAllPlansAsync(int gymId);
     }
 }

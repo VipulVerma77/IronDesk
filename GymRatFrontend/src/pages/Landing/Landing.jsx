@@ -7,7 +7,7 @@ import CTASection from './sections/CTASection';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #B8C4CC 0%, #C8D4D8 50%, #B0BCC4 100%)' }}>
+    <div className="min-h-screen">
       <Navbar />
       <HeroSection />
       <StatsSection />

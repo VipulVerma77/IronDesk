@@ -42,7 +42,27 @@ namespace GymRat.Services
                 Description = membershipPlan.Description,
                 IsActive = membershipPlan.IsActive
             };
-            return ApiResponse<MembershipPlanResponseDto>.Success("Membership Plan created succussfully",memberPlan);
+            return ApiResponse<MembershipPlanResponseDto>.Success("Membership Plan created succussfully", memberPlan);
         }
+
+        public async Task<ApiResponse<List<MembershipPlanResponseDto>>> GetAllPlansAsync(int gymId)
+        {
+            var plans = await _context.MembershipPlans
+                .Where(p => p.GymId == gymId && p.IsActive)
+                .Select(p => new MembershipPlanResponseDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    DurationInDays = p.DurationInDays,
+                    Description = p.Description,
+                    IsActive = p.IsActive,
+                })
+                .ToListAsync();
+
+            return ApiResponse<List<MembershipPlanResponseDto>>
+                .Success("Plans fetched", plans);
+        }
+
     }
 }
