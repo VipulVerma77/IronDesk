@@ -143,6 +143,9 @@ namespace GymRat.Services
             if (gym == null)
                 return ApiResponse<PublicGymResponseDto>.Fail("Gym not found");
 
+            var activeMemberCount = await _context.Members
+   .CountAsync(m => m.GymId == gym.Id && m.Status == "Active");
+
             var result = new PublicGymResponseDto
             {
                 Id = gym.Id,
@@ -151,6 +154,7 @@ namespace GymRat.Services
                 LogoPath = gym.LogoPath,
                 Theme = gym.Theme,
                 Slug = gym.Slug,
+                ActiveMemberCount = activeMemberCount,
                 Plans = gym.MembershipPlans.Select(p => new PublicPlanDto
                 {
                     Id = p.Id,

@@ -9,6 +9,7 @@ namespace GymRat.DTOs.Gym
         public string? LogoPath { get; set; }
         public string Theme { get; set; } = "default";
         public string Slug { get; set; } = string.Empty;
+        public int ActiveMemberCount { get; set; } 
         public List<PublicPlanDto> Plans { get; set; } = new();
     }
 

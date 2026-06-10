@@ -14,6 +14,7 @@ export const API = {
   GYM_UPDATE:   `${BASE_URL}/gym/update`,
   GYM_SLUG:     (slug) => `${BASE_URL}/gym/public/${slug}`,
   GYM_DELETE:   `${BASE_URL}/gym/delete`,
+  GYM_UPDATE_THEME: `${BASE_URL}/gym/update-theme`,
 
   // Dashboard
   DASHBOARD_SUMMARY: `${BASE_URL}/dashboard/summary`,
@@ -43,4 +44,7 @@ export const API = {
   ATTENDANCE_TODAY:    (page, size) => `${BASE_URL}/attendance/today?pageNumber=${page}&pageSize=${size}`,
   ATTENDANCE_MEMBER:   (id, page, size) => `${BASE_URL}/attendance/member/${id}?pageNumber=${page}&pageSize=${size}`,
   ATTENDANCE_RANGE:    (from, to, page, size) => `${BASE_URL}/attendance/range?fromDate=${from}&toDate=${to}&pageNumber=${page}&pageSize=${size}`,
+
+  SUB_PUBLIC: `${BASE_URL}/subscription/public/subscribe`,
+
 };

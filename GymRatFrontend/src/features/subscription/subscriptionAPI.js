@@ -15,3 +15,6 @@ export const cancelSubscriptionAPI = (id) =>
 
 export const getMySubscriptionsAPI = (page = 1, size = 10) =>
   axiosInstance.get(API.SUB_MY(page, size));
+
+export const publicSubscribeAPI = (slug, data) =>
+  axiosInstance.post(`${API.SUB_PUBLIC}?slug=${slug}`, data);
