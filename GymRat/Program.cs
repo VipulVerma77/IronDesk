@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("FrontendPolicy", policy =>
     {
         policy
-            .WithOrigins("https://iron-desk-six.vercel.app")
+            .WithOrigins("https://iron-desk-six.vercel.app","http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
