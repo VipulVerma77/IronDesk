@@ -33,6 +33,8 @@ namespace GymRat.Services
                 Role = "Member",
                 GymId = gymId
             };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
 
             var member = new Member
             {
@@ -42,10 +44,10 @@ namespace GymRat.Services
                 Address = memberDto.Address,
                 JoinDate = memberDto.JoinDate,
                 GymId = gymId,
+                UserId   = user.Id,
                 Status = "Active"
             };
 
-            _context.Users.Add(user);
             _context.Members.Add(member);
 
             await _context.SaveChangesAsync();
