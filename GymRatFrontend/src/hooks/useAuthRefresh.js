@@ -11,7 +11,11 @@ const useAuthRefresh = () => {
   useEffect(() => {
     const tryRefresh = async () => {
       try {
-        const response = await axiosInstance.post(API.REFRESH, {});
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(),5000);
+        const response = await axiosInstance.post(API.REFRESH, {}, { signal: controller.signal });
+
+        clearTimeout(timeout);
         const { data } = response.data;
 
         if (data?.accessToken) {
@@ -27,7 +31,7 @@ const useAuthRefresh = () => {
           }));
         }
       } catch(err) {
-        console.error("Refresh Hook error",err.message);
+        console.error("Refresh Hook error");
       } finally {
         setIsChecking(false);
       }

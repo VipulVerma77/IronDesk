@@ -36,35 +36,38 @@ const PageLoader = () => (
 const App = () => {
   const { isChecking } = useAuthRefresh();
 
-  if (isChecking) return <PageLoader />;
-
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
-
-        {/* ── Public routes ── */}
+        {/* Public routes — render immediately, no waiting */}
         <Route path="/"             element={<Landing />} />
         <Route path="/gym/:slug"    element={<GymPublic />} />
         <Route path="/register-gym" element={<RegisterGym />} />
         <Route path="/login"        element={<Login />} />
 
-        {/* ── Admin routes ── */}
-        <Route element={<ProtectedRoute allowedRole="Admin" />}>
+        {/* Protected routes — wait for auth check */}
+        <Route element={
+          isChecking
+            ? <PageLoader />
+            : <ProtectedRoute allowedRole="Admin" />
+        }>
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="members" element={<Members />} />
+            <Route index              element={<AdminDashboard />} />
+            <Route path="members"       element={<Members />} />
             <Route path="subscriptions" element={<Subscriptions />} />
-            <Route path="payments" element={<Payments />} />
-            <Route path="attendance" element={<Attendance />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="payments"      element={<Payments />} />
+            <Route path="attendance"    element={<Attendance />} />
+            <Route path="settings"      element={<Settings />} />
           </Route>
         </Route>
 
-        {/* ── Member routes ── */}
-        <Route element={<ProtectedRoute allowedRole="Member" />}>
+        <Route element={
+          isChecking
+            ? <PageLoader />
+            : <ProtectedRoute allowedRole="Member" />
+        }>
           <Route path="/member" element={<MemberDashboard />} />
         </Route>
-
       </Routes>
     </Suspense>
   );
