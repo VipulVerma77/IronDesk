@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "../app/store";
 import { logout, setCredentials } from "../features/auth/authSlice";
+import { API } from "../constants/api";
 
 const axiosInstance = axios.create({
     baseUrl: "http://localhost:5006/api",
@@ -26,7 +27,7 @@ axiosInstance.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const response = await axios.post('http://localhost:5000/api/auth/refresh',
+                const response = await axios.post(`${API?.REFRESH}`,
                     {},
                     { withCredentials: true }
                 );
