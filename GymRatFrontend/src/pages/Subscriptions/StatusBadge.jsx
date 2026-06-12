@@ -1,3 +1,5 @@
+import { Ban, Calendar, CheckCircle, Clock, X } from "lucide-react";
+
 const StatusBadge = ({ status }) => {
   const styles = {
     Active:    'bg-green-100 text-green-700',

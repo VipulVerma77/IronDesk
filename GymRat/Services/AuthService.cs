@@ -67,7 +67,7 @@ namespace GymRat.Services
             if (user == null)
                 return ApiResponse<AuthResponseDto>.Fail("Invalid email or password");
 
-            // ✅ Block soft deleted users
+            //  Block soft deleted users
             if (user.IsDeleted)
                 return ApiResponse<AuthResponseDto>.Fail("This account has been deactivated. Contact your gym admin.");
 

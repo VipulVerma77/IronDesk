@@ -1,3 +1,5 @@
+import { CheckCircle, Clock, X } from "lucide-react";
+
 const StatusBadge = ({ status }) => {
   const styles = {
     Paid:      'bg-green-100 text-green-700',
