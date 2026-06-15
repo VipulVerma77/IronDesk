@@ -16,55 +16,12 @@ import {
   UserPlus,
 } from 'lucide-react';
 import { getDashboardSummaryAPI } from '../../features/dashboard/dashboardAPI';
+import StatCard from './StatCard';
+import RevenueHeroCard from './RevenueHeroCard';
 
-// ─────────────────────────────────────────
-// Stat Card (LCP optimized)
-// ─────────────────────────────────────────
-const StatCard = ({
-  title,
-  value,
-  icon: Icon,
-  color,
-  delay = 0,
-  loading = false,
-}) => (
-  <div
-    className="
-      group relative overflow-hidden bg-white rounded-3xl p-6
-      border border-[#ECE4DC] shadow-sm hover:shadow-xl
-      transition-all duration-300
-    "
-  >
-    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C4956A] via-[#D9B08C] to-[#C4956A]" />
 
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-xs uppercase tracking-wider text-[#6B6B6B] mb-2">
-          {title}
-        </p>
 
-        {loading ? (
-          <div className="h-10 w-24 bg-[#ECE4DC] rounded animate-pulse" />
-        ) : (
-          <p className="text-4xl font-black text-[#2A1F1A] tracking-tight">
-            {value ?? "—"}
-          </p>
-        )}
 
-        <div className="flex items-center gap-1 mt-3">
-          <TrendingUp size={12} className="text-green-500" />
-          <span className="text-xs font-medium text-green-500">
-            Active Growth
-          </span>
-        </div>
-      </div>
-
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${color}`}>
-        <Icon size={24} className="text-white" />
-      </div>
-    </div>
-  </div>
-);
 
 // ─────────────────────────────────────────
 // Section Title
@@ -91,12 +48,14 @@ const Skeleton = ({ className }) => (
 const AdminDashboard = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['dashboard-summary'],
-    queryFn:  async () => {
+    queryFn: async () => {
       const res = await getDashboardSummaryAPI();
       return res.data.data;
     },
     staleTime: 1000 * 60 * 2,
   });
+
+  console.log(data)
 
   return (
     <div className="flex flex-col gap-8">
@@ -147,20 +106,22 @@ const AdminDashboard = () => {
           <div>
             <p className="text-sm font-semibold text-[#6B6B6B] uppercase tracking-wide mb-3">Members</p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard title="Total"    value={data.members?.total}    icon={Users}     color="bg-[#1C1C1C]" />
-              <StatCard title="Active"   value={data.members?.active}   icon={UserCheck} color="bg-green-500"  />
-              <StatCard title="Inactive" value={data.members?.inactive} icon={UserX}     color="bg-[#C4956A]"  />
-              <StatCard title="Blocked"  value={data.members?.blocked}  icon={ShieldOff} color="bg-red-400"    />
+              <StatCard title="Total" value={data.memberStats?.total} icon={Users} color="bg-[#1C1C1C]" />
+              <StatCard title="Active" value={data.memberStats?.active} icon={UserCheck} color="bg-green-500" />
+              <StatCard title="Inactive" value={data.memberStats?.inactive} icon={UserX} color="bg-[#C4956A]" />
+              <StatCard title="Blocked" value={data.memberStats?.blocked} icon={ShieldOff} color="bg-red-400" />
             </div>
           </div>
 
           {/* Revenue Stats */}
           <div>
             <p className="text-sm font-semibold text-[#6B6B6B] uppercase tracking-wide mb-3">Revenue</p>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <StatCard title="Total"      value={`₹${data.revenue?.total?.toLocaleString()}`}     icon={DollarSign} color="bg-[#1C1C1C]" />
-              <StatCard title="This Month" value={`₹${data.revenue?.thisMonth?.toLocaleString()}`} icon={TrendingUp} color="bg-green-500"  />
-              <StatCard title="Pending"    value={`₹${data.revenue?.pending?.toLocaleString()}`}   icon={Clock}      color="bg-[#C4956A]"  />
+            <div className=" mb-6">
+              <RevenueHeroCard
+                totalRevenue={data.revenueStats?.totalRevenue}
+                monthlyRevenue={data.revenueStats?.thisMonthRevenue}
+                pendingRevenue={data.revenueStats?.pendingRevenue}
+              />
             </div>
           </div>
 
@@ -168,8 +129,8 @@ const AdminDashboard = () => {
           <div>
             <p className="text-sm font-semibold text-[#6B6B6B] uppercase tracking-wide mb-3">Attendance</p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <StatCard title="Today"           value={data.attendance?.today}           icon={CalendarCheck} color="bg-[#1C1C1C]" />
-              <StatCard title="Currently Inside" value={data.attendance?.currentlyInside} icon={Activity}      color="bg-green-500"  />
+              <StatCard title="Today" value={data.attendanceStats?.todayCheckIns} icon={CalendarCheck} color="bg-[#1C1C1C]" />
+              <StatCard title="Currently Inside" value={data.attendanceStats?.currentlyInside} icon={Activity} color="bg-green-500" />
             </div>
           </div>
 
@@ -192,9 +153,8 @@ const AdminDashboard = () => {
                         <p className="text-sm font-medium text-[#2A1F1A]">{item.memberName}</p>
                         <p className="text-xs text-[#6B6B6B]">{item.planName}</p>
                       </div>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                        item.daysLeft <= 2 ? 'bg-red-100 text-red-600' : 'bg-[#C4956A]/10 text-[#C4956A]'
-                      }`}>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.daysLeft <= 2 ? 'bg-red-100 text-red-600' : 'bg-[#C4956A]/10 text-[#C4956A]'
+                        }`}>
                         {item.daysLeft}d left
                       </span>
                     </div>

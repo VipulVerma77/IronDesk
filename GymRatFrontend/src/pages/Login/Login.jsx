@@ -188,7 +188,6 @@ const Login = () => {
                         })}
                     </motion.div>
 
-                    {/* Testimonial */}
                     <motion.div
                         className="bg-white rounded-3xl p-6 border border-[#ECE4DC] shadow-lg"
                         initial={{ opacity: 0, y: 20 }}
@@ -213,9 +212,9 @@ const Login = () => {
 
                         <div className="flex items-end gap-2 h-24">
                             {[35, 55, 45, 80, 65, 95].map(
-                                (v, i) => (
+                                (v) => (
                                     <div
-                                        key={i}
+                                        key={v}
                                         className="flex-1 bg-[#C4956A] rounded-t-lg"
                                         style={{
                                             height: `${v}%`,
@@ -238,18 +237,18 @@ const Login = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7 }}
             >
-               
-                <div className="w-full max-w-md">
-                 <div className="inline-flex items-center gap-2 bg-white border border-[#ECE4DC] rounded-full px-4 py-2 shadow-sm mb-6">
-                            <Activity
-                                size={14}
-                                className="text-green-500"
-                            />
 
-                            <span className="text-sm text-[#6B6B6B]">
-                                Trusted by fitness businesses
-                            </span>
-                        </div>
+                <div className="w-full max-w-md">
+                    <div className="inline-flex items-center gap-2 bg-white border border-[#ECE4DC] rounded-full px-4 py-2 shadow-sm mb-6">
+                        <Activity
+                            size={14}
+                            className="text-green-500"
+                        />
+
+                        <span className="text-sm text-[#6B6B6B]">
+                            Trusted by fitness businesses
+                        </span>
+                    </div>
                     <div className="bg-white/70 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/60">
 
                         {/* Header */}
@@ -321,12 +320,12 @@ const Login = () => {
                                 size="md"
                                 fullWidth
                                 type="submit"
-                                disabled={loading}
+                                isLoading={loading}
                             >
-                                {loading ? 'Signing in...' : <div className="flex items-center justify-center gap-2">
+                                <div className="flex items-center justify-center gap-2">
                                     Sign In
                                     <ArrowRight size={16} />
-                                </div>}
+                                </div>
                             </Button>
                         </form>
 

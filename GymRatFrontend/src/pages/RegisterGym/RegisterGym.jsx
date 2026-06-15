@@ -69,7 +69,7 @@ const RegisterGym = () => {
         mode: 'onChange',
     });
 
-    
+
     const stepOneFields = ['gymName', 'gymEmail', 'phone', 'address', 'description'];
 
     const handleNext = async () => {
@@ -237,8 +237,8 @@ const RegisterGym = () => {
                                     <div key={s} className="flex items-center gap-2">
                                         <div className={`flex items-center gap-1.5`}>
                                             <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${i <= step
-                                                    ? 'bg-[#1C1C1C] text-white'
-                                                    : 'bg-[#E0D8D0] text-[#6B6B6B]'
+                                                ? 'bg-[#1C1C1C] text-white'
+                                                : 'bg-[#E0D8D0] text-[#6B6B6B]'
                                                 }`}>
                                                 {i < step ? '✓' : i + 1}
                                             </div>
@@ -378,7 +378,7 @@ const RegisterGym = () => {
                                             onClick={() => setShowPass(!showPass)}
                                             className="absolute right-3 top-8 text-[#6B6B6B] text-sm pointer"
                                         >
-                                            {showPass ? <EyeOff size={18}/> : <Eye size={18}/>}
+                                            {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                                         </button>
                                     </div>
                                     <Input
@@ -403,9 +403,9 @@ const RegisterGym = () => {
                                             size="md"
                                             fullWidth
                                             type="submit"
-                                            disabled={loading}
+                                            isLoading={loading}
                                         >
-                                            {loading ? 'Registering...' : 'Register Gym'}
+                                            Register Gym
                                         </Button>
                                     </div>
                                 </motion.div>
