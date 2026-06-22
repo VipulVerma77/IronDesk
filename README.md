@@ -2,7 +2,7 @@
 
 A multi-tenant Gym Management SaaS platform built with ASP.NET Core and React. Gym owners can register their own gym, manage members, subscriptions, payments and attendance — all from a single dashboard, fully isolated from other gyms on the platform.
 
-**Live Demo:** [https://irondesk.vercel.app](https://irondesk.vercel.app)
+**Live Demo:** [https://iron-desk-six.vercel.app/](https://iron-desk-six.vercel.app/)
 **API:** [https://irondesk-98q8.onrender.com/api](https://irondesk-98q8.onrender.com/api)
 
 > Note: Backend is on Render's free tier and may take 30-50s to wake up on first request after inactivity.
